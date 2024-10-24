@@ -32,8 +32,18 @@ const onNouMissatge = (missatge) => {
       <option value="Joan">Joan</option>
     </select>
 
-    <div class="missatge" v-for="missatge in missatges" :key="missatge.idMissatge">
-      <strong>{{ missatge.usuari }}:</strong> {{ missatge.missatge }}
+    <div class="missatgeContenedor">
+      <div class="missatge" v-for="missatge in missatges" :key="missatge.idMissatge">
+        <strong>{{ missatge.usuari }}:</strong> {{ missatge.missatge }}
+        <!--TODO, mostrar hora del missatge, nomes hora i minuts-->
+        <div class="horaMissatge">
+          <small>
+            {{ new Date(missatge.idMissatge).getHours() }}:{{
+              new Date(missatge.idMissatge).getMinutes()
+            }}
+          </small>
+        </div>
+      </div>
     </div>
     <ComponentMissatge :autor="autor" @onNouMissatge="onNouMissatge" />
   </div>
@@ -51,12 +61,53 @@ const onNouMissatge = (missatge) => {
   border-radius: 5px;
 }
 
-.missatge {
-  width: auto;
+/* scroll al contenidor de missatges i scrollea automàticament */
+.missatgeContenedor {
+  overflow-y: auto;
+  height: 200px;
+  margin: 10px;
   padding: 10px;
-  margin: 2px 10px 2px 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
+}
+
+.missatgeContenedor small {
+  color: #777;
+}
+
+.missatgeContenedor .horaMissatge {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.missatgeContenedor::-webkit-scrollbar {
+  width: 10px;
+}
+
+.missatgeContenedor::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 5px;
+}
+
+.missatgeContenedor::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+  border-radius: 5px;
+}
+
+.missatgeContenedor::-webkit-scrollbar-thumb:hover {
+  background-color: #aaa;
+}
+
+.missatge {
+  width: auto;
+  margin: 3px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  word-wrap: break-word;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
 select {
