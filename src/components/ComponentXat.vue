@@ -19,8 +19,13 @@ const autor = ref('Pere')
 
 const onNouMissatge = (missatge) => {
   missatge.idMissatge = Date.now()
-  //console.log(missatge)
+  //console.log(missatge.idMissatge)
   missatges.value.push(missatge)
+}
+const formatMinuts = (minuts) => {
+  if (minuts < 10) {
+    return 0
+  }
 }
 </script>
 
@@ -33,14 +38,18 @@ const onNouMissatge = (missatge) => {
     </select>
 
     <div class="missatgeContenedor">
-      <div class="missatge" v-for="missatge in missatges" :key="missatge.idMissatge">
+      <div
+        class="missatge"
+        v-for="missatge in missatges"
+        :key="missatge.idMissatge"
+        :id="missatge.idMissatge"
+      >
         <strong>{{ missatge.usuari }}:</strong> {{ missatge.missatge }}
-        <!--TODO, mostrar hora del missatge, nomes hora i minuts-->
         <div class="horaMissatge">
           <small>
-            {{ new Date(missatge.idMissatge).getHours() }}:{{
-              new Date(missatge.idMissatge).getMinutes()
-            }}
+            {{ new Date(missatge.idMissatge).getHours() }}:
+            {{ formatMinuts(new Date(missatge.idMissatge).getMinutes()) }}
+            {{ new Date(missatge.idMissatge).getMinutes() }}
           </small>
         </div>
       </div>

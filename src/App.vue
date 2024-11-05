@@ -9,4 +9,10 @@ import ComponentXat from './components/ComponentXat.vue'
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+h3 {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+}
+</style>
